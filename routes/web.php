@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Motos;
+use \App\Http\Controllers\Frameworl;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,7 +47,12 @@ Route::get('/motos/{id?}/{nomeMoto}',function($id = null, $nomeMoto = null){
 })->where(['id'=>'[0-9]+','nomeModelo'=>'[a-z]+']);
 
 
-//Rota que irá aparecer automaticamente quando for colocado uma url erra
+//Rota que irá aparecer automaticamente quando for colocado uma url errado
 Route::fallback(function (){
     return "Não existe essa rota otário";
 });
+
+//Rota com chamada para um controller e sua função.
+Route::get('/modelo/motos',[Motos::class,'modelo']);
+
+Route::get('/app',[Frameworl::class,'index']);
